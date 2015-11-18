@@ -10,13 +10,15 @@ Package.onUse(function(api) {
   api.use(["meteor","mongo","check","underscore", "eluck:aws-sdk"]);
 
   api.addFiles("lib/server/meteorsns.js", ["server"]);
-  api.export('MeteorSNS', ["server"]);
+  api.export('SNSPush', ["server"]);
 });
 
 
 Package.onTest(function (api) {
     api.use(["tinytest", "test-helpers"]);
-    api.use(["mmmelon:sns-push"]);
+    api.use(["meteor","mongo","check","underscore", "eluck:aws-sdk"]);
+    api.addFiles("lib/server/meteorsns.js", ["server"]);
 
+    api.add_files('tests/stubs.js', 'server');
     api.add_files('tests/tests.js', 'server');
 });
