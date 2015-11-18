@@ -7,7 +7,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom("1.0.1");
-  api.use(["meteor","mongo","check","underscore", "eluck:aws-sdk"]);
+  api.use(["meteor","mongo","check", "eluck:aws-sdk"]);
 
   api.addFiles("lib/server/meteorsns.js", ["server"]);
   api.export('SNSPush', ["server"]);
