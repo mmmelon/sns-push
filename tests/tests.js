@@ -22,8 +22,21 @@ Tinytest.add('SNSPush register device', function (test) {
 	sns.sns.createPlatformEndpoint = function(params,callback){
 		called=true;
 	}
+	SnsPushTokens.findOne = function(query){
+		return undefined;
+	}
 	sns.registerDevice("a","b","c");
 	test.isTrue(called, "Called")
+});
+
+Tinytest.add('SNSPush register device if already exists', function (test) {
+	var sns = new SNSPush(credentials,"arn");
+	var called = false;
+	SnsPushTokens.findOne = function(query){
+		return {};
+	}
+	sns.registerDevice("a","b","c");
+	test.isFalse(called, "Called")
 });
 
 Tinytest.add('SNSPush unregister device', function (test) {
@@ -44,6 +57,9 @@ Tinytest.add('SNSPush register device error', function (test) {
 	}
 	sns._endpointCreateError = function(err){
 		called = true;
+	}
+	SnsPushTokens.findOne = function(query){
+		return undefined;
 	}
 	sns.registerDevice("a","b","c");
 	test.isTrue(called, "Called")

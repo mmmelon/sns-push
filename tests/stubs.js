@@ -12,3 +12,5 @@ AWS = {
 		}
 	}
 }
+
+SnsPushTokens = {};
