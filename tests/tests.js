@@ -77,3 +77,44 @@ Tinytest.add('SNSPush unregister device error', function (test) {
 	sns.unRegisterDevice("a","b","c");
 	test.isTrue(called, "Called")
 });
+
+Tinytest.add('SNSPush sendPush', function (test) {
+	var sns = new SNSPush(credentials,"arn");
+	var called = false;
+	SnsPushTokens.find = function(){
+		return {
+			forEach:function(){
+				called = true;
+			}
+		}
+	}
+	sns.sendPush("userId","message");
+	test.isTrue(called, "Called")
+});
+
+Tinytest.add('SNSPush sendPush calls publish', function (test) {
+	var sns = new SNSPush(credentials,"arn");
+	var called = false;
+	SnsPushTokens.find = function(){
+		return {
+			forEach:function(callback){
+				callback({endpointArn:""});
+			}
+		}
+	}
+	sns._publish = function(){
+		called = true;
+	}
+	sns.sendPush("userId","message");
+	test.isTrue(called, "Called")
+});
+
+Tinytest.add('SNSPush publish', function (test) {
+	var sns = new SNSPush(credentials,"arn");
+	var called = false;
+	sns.sns.publish = function(){
+		called = true;
+	}
+	sns._publish("endpointArn","message",{},0);
+	test.isTrue(called, "Called")
+});
