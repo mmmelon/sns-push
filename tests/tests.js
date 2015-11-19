@@ -61,6 +61,9 @@ Tinytest.add('SNSPush unregister device', function (test) {
 	sns.sns.deleteEndpoint = function(params,callback){
 		called=true;
 	}
+	SnsPushTokens.findOne = function(query){
+		return {};
+	}
 	sns.unRegisterDevice("a","b","c");
 	test.isTrue(called, "Called")
 });
@@ -89,6 +92,9 @@ Tinytest.add('SNSPush unregister device error', function (test) {
 	}
 	sns._endpointRemoveError = function(err){
 		called = true;
+	}
+	SnsPushTokens.findOne = function(query){
+		return {};
 	}
 	sns.unRegisterDevice("a","b","c");
 	test.isTrue(called, "Called")
