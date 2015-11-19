@@ -9,31 +9,31 @@ It exposes a simple API and stores all the push information in a special collect
 
 ## Installing
 
-~~~shell
+````shell
 meteor add mmmelon:sns-push
-~~~
+````
 
 ## Setting up SNSPush
 
 SNSPush creates an object you could declare as local or global. That constructor requires credentials and amazon sns arn. Credentials could also include region, if not region present it will default to 'us-east-1'. You could also include a third parameter with the audio name to be played once device recieves the push notification.
 
-~~~js
+````js
 var credentials = {
 	accessKeyId: "fakeId",
 	secretAccessKey: "fakeSecret"
 }
 snsPush = new SNSPush(credentials,"arn");
-~~~js
+````
 
 And with audio:
 
-~~~js
+````js
 var credentials = {
 	accessKeyId: "fakeId",
 	secretAccessKey: "fakeSecret"
 }
 snsPush = new SNSPush(credentials,"arn","message.caf");
-~~~js
+````
 
 ## Registering a device
 
@@ -56,9 +56,9 @@ You'll get the token from Apple inside your iOS app and deviceId could be iOS UU
 
 Let's register our first device:
 
-~~~js
+````js
 snsPush.registerDevice(token,deviceId,userId);
-~~~
+````
 
 Done!
 
