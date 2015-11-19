@@ -1,7 +1,7 @@
 Package.describe({
   name: "mmmelon:sns-push",
   summary: "sns-push makes sending and managing push notifications easy. Uses Amazon sns.",
-  version: "0.1.2",
+  version: "0.2.0",
   git: "https://github.com/mmmelon/sns-push"
 });
 
