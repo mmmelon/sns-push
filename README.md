@@ -62,8 +62,34 @@ snsPush.registerDevice(token,deviceId,userId);
 
 Done!
 
-Call it from a method or any server side code you have.
+Call it from a method or any server side code you have. You can call this method from your app each time you recieve the token from apple. It will avoid tuplicated tokens.
 
-.......
-Work In Progress. Package not published yet
-.....
+## Removing a device
+
+The best case to remove a device is when user logouts from your app. If you don't remove the token it will keep sending push notifications. To unregister a device just call:
+
+````js
+snsPush.unRegisterDevice(token,deviceId,userId);
+````
+
+This will remove the token saved for that device from your database and also from amazon sns.
+
+## Sending a push notification
+
+To send a push notification to an userId use:
+
+````js
+snsPush.sendPush(userId,message,extraData,badgeCount);
+````
+
+You can include a metadata object in extraData and a number in badgeCount to set application icon badge. This method will send a push notification to all the tokens saved to that user.
+
+## Contributing
+
+Anyone is welcome to contribute. Fork, make and test your changes (meteor test-packages ./), and then submit a pull request.
+
+## Major Contributors
+
+@bitomule
+
+(Add yourself if you should be listed here.)
